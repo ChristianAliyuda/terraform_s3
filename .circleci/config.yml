@@ -1,0 +1,22 @@
+version: 2.1
+orbs:
+  aws-s3: circleci/aws-s3@1.0.6
+
+jobs:
+  build:
+    docker:
+      - image: 'circleci/python:latest'
+
+    steps:
+      - checkout
+      - aws-s3/sync:
+          from: .
+          to: 's3://your-bucket'
+          arguments: |
+            --acl public-read \
+            --cache-control "max-age=86400" \
+            --exclude ".git/*" \
+            --exclude ".gitignore" \
+            --exclude ".circleci/*" \
+          overwrite: true
+
