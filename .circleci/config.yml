@@ -1,0 +1,27 @@
+version: 2.1
+
+jobs:
+  build:
+    machine:
+      image: ubuntu-2004:202010-01
+    steps:
+      - checkout
+      - run:
+          name: Installing AWS CLI
+          command: |
+            sudo apt-get update
+            sudo apt install python3-pip
+            sudo pip3 install awsebcli --upgrade
+
+  deploy:
+    machine:
+      image: ubuntu-2004:202010-01
+    steps:   # Changed 'step' to 'steps'
+      - checkout
+      - run: aws s3 sync ./module s3://ci-cd-example
+
+workflows:
+  build_test_deploy:
+    jobs:
+      - build   # Indentation corrected
+      - deploy  # Indentation corrected
