@@ -18,7 +18,7 @@ jobs:
       image: ubuntu-2004:202010-01
     steps:   # Changed 'step' to 'steps'
       - checkout
-      - run: aws s3 sync ./provider.tf,terraform.tfstate,terraform.tfstate.backup s3://ci-cd-example
+      - run: aws s3 sync ./module s3://ci-cd-example
 
 workflows:
   build_test_deploy:
