@@ -12,17 +12,16 @@ jobs:
             sudo apt-get update
             sudo apt install python3-pip
             sudo pip3 install awsebcli --upgrade
+
   deploy:
     machine:
-        image: ubuntu-2004:202010-01
-    step:
+      image: ubuntu-2004:202010-01
+    steps:   # Changed 'step' to 'steps'
       - checkout
       - run: aws s3 sync ./app/build s3://ci-cd-example
-    
 
 workflows:
   build_test_deploy:
     jobs:
-      - build
-      
-    
+      - build   # Indentation corrected
+      - deploy  # Indentation corrected
