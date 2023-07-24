@@ -15,9 +15,7 @@ jobs:
   deploy:
     machine:
         image: ubuntu-2004:202010-01
-    steps:
-      - attach_workspace:
-          at: .
+    step:
       - checkout
       - run: aws s3 sync ./app/build s3://ci-cd-example
     
@@ -26,9 +24,5 @@ workflows:
   build_test_deploy:
     jobs:
       - build
-      - test:
-          requires:
-            - build
-      - deploy:
-          requires:
-            - test
+      
+    
